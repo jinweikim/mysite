@@ -1,0 +1,52 @@
+<!--文章详情页-->
+{% extends 'base.html' %}
+
+{% block title %}文章{% endblock %}
+
+{% block content %}
+{% load list_markdown %}
+        <div class="col-sm-9">
+			<!-- Articles -->
+			<div class="row">
+				<article class="col-xs-12">
+					<h2>{{ article.title }}</h2>
+					<p class="pull-right"><span class="label label-default">{{ article.category }}</span> <span class="label label-default">{{ article.author }}</span></p>
+					<p><hr></p>
+                    <p>{{ article.get_markdown | safe }}</p>
+                    <p></p>
+                    <ul class="list-inline">
+						<li><a href="#">{{ article.pub_date | date:"j M" }}</a></li>
+						<li><a href="#"><span class="glyphicon glyphicon-comment"></span>{{ article.comment_num }}</a></li>
+					</ul>
+				</article>
+			</div>
+			<hr>
+            <h3>评论</h3>
+            <hr>
+            {% for comment in comments %}
+            <div class="row">
+                <article class="col-xs-12">
+                    <p class="pull-right"><span class="label-default">{{ comment.user }}</span></p>
+                    <p>{{ comment.content }}</p>
+
+                    <ul class="list-inline">
+                        <li><a href="#">{{ comment.pub_date | date:"j M" }}</a></li>
+                    </ul>
+                </article>
+            </div>
+            <hr>
+            {% endfor %}
+            <div class="row">
+                <article class="col-xs-12">
+                    <h4>分享你的评论</h4>
+                    <form action="/blog/{{ article.id }}/comment/" method="post">
+                        {% csrf_token %}
+                        {{ commentform.as_p}}
+                        <input class="btn btn-default" type="submit" value="提交">
+                    </form>
+                </article>
+            </div>
+            <hr>
+		</div>
+
+{% endblock %}

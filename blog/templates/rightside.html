@@ -1,0 +1,99 @@
+<!--右边栏-->
+{% if request.user.is_authenticated %}
+			<!-- Form -->
+		    <div class="panel panel-default">
+				<div class="panel-heading">
+					<h3 class="panel-title">
+						<span class="glyphicon glyphicon-log-in"></span>
+						Logged In
+					</h3>
+				</div>
+				<div class="panel-body">
+					<div class="form-group">hi:{{ user }} <a href="/blog/logout/"><input class="btn btn-default" type="submit" value="Loggout"/></a></div>
+				</div>
+			</div>
+		    {% else %}
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h3 class="panel-title">
+						<span class="glyphicon glyphicon-log-in"></span>
+						Log In
+					</h3>
+				</div>
+				<div class="panel-body">
+					<form action="/blog/login/" method="post">
+						{% csrf_token %}
+						{{ loginform.non_field_errors }}
+						<div class="form-group">
+							{{ loginform.uid }}
+						</div>
+						<div class="form-group">
+							{{ loginform.pwd }}
+						</div>
+						<button type="submit" class="btn btn-default">Log In</button>
+					</form>
+				</div>
+			</div>
+		    {% endif %}
+
+			<!-- Carousel -->
+ 			<h3><span class="glyphicon glyphicon-modal-window"></span> Synergization</h3>
+			<div id="side-carousel" class="carousel slide" data-ride="carousel">
+				<ol class="carousel-indicators">
+					<li data-target="#side-carousel" data-slide-to="0" class="active"></li>
+					<li data-target="#side-carousel" data-slide-to="1"></li>
+					<li data-target="#side-carousel" data-slide-to="2"></li>
+				</ol>
+				<div class="carousel-inner" role="listbox">
+					<div class="item active">
+						<a href="#">
+							<img class="img-responsive" src="holder.js/400x300?bg=FF8C00&text=Image%201" alt="">
+						</a>
+						<div class="carousel-caption">
+							<h3>Dramatically Engage</h3>
+							<p>Objectively innovate empowered manufactured products whereas parallel platforms.</p>
+						</div>
+					</div>
+					<div class="item">
+						<a href="#">
+							<img class="img-responsive" src="holder.js/400x300?bg=FF8C00&text=Image%202" alt="">
+						</a>
+						<div class="carousel-caption">
+							<h3>Efficiently Unleash</h3>
+							<p>Dramatically maintain clicks-and-mortar solutions without functional solutions.</p>
+						</div>
+					</div>
+					<div class="item">
+						<a href="#">
+							<img class="img-responsive" src="holder.js/400x300?bg=FF8C00&text=Image%203" alt="">
+						</a>
+						<div class="carousel-caption">
+							<h3>Proactively Pontificate</h3>
+							<p>Holistically pontificate installed base portals after maintainable products.</p>
+						</div>
+					</div>
+				</div>
+				<a class="left carousel-control" href="#side-carousel" role="button" data-slide="prev">
+				  <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+				  <span class="sr-only">Previous</span>
+				</a>
+				<a class="right carousel-control" href="#side-carousel" role="button" data-slide="next">
+				  <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+				  <span class="sr-only">Next</span>
+				</a>
+			  </div>
+<!--标签-->
+              <div  class="well">
+				  <h4><span class="glyphicon glyphicon-align-justify"></span>标签</h4>
+				  <div class="row">
+					  <div class="col-lg-6">
+						  <ul class="list-unstyled">
+							  {% for tag in tag_list %}
+							  <li class="cat-item"><span class="glyphicon glyphicon-tag"></span>
+								  <a href="{% url 'tag' tag.pk%}">{{ tag.name }}</a>
+							  </li>
+							  {% endfor %}
+						  </ul>
+					  </div>
+				  </div>
+			  </div>
