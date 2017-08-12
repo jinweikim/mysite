@@ -22,6 +22,14 @@
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+    <style>
+        .footer {
+            border-top: 1px solid #e5e5e5;
+            color: #777;
+            padding: 19px 0;
+            background-color: #f5f5f5;
+        }
+    </style>
     {% block head %}{% endblock %}
 
 </head>
@@ -34,7 +42,6 @@
         <div class="col-sm-9">
         {% block content %}{% endblock %}
         </div>
-
         <div class="col-sm-3">
         {% block right %}
             {% include 'rightside.html' %}
