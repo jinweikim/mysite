@@ -14,7 +14,7 @@
 {% if article_list %}
     {% for article in article_list %}
     <div class="row">
-		<article class="col-xs-12">
+		<article class="col-xs-12 white">
 			<h2><a id="article_title" href="/blog/{{ article.id }}">{{ article.title }}</a></h2>
 			<p>{{ article.get_markdown | safe | truncatechars_html:100 }}</p>
 			<p><a id="Read_More" href="/blog/{{ article.id }}"><button class="btn btn-default">Read More</button></a></p>

@@ -80,7 +80,7 @@ class Article(models.Model):
     objects = ArticleManager()
 
     def get_markdown(self):
-        md = markdown.Markdown()
+        md = markdown.Markdown(['extra','codehilite'])
 
         for image in self.images.all():
             image_url = '/blog' + image.image.url
