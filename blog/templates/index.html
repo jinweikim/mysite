@@ -1,7 +1,7 @@
 <!--主页-->
 {% extends 'base.html' %}
 
-{% block title %}主页{% endblock %}
+{% block title %}金苇的个人博客{% endblock %}
 
 {% block content %}
 {% load list_markdown %}
@@ -13,30 +13,34 @@
 <!-- Articles -->
 {% if article_list %}
     {% for article in article_list %}
-    <div class="row">
-		<article class="col-xs-12 white">
-			<h2><a id="article_title" href="/blog/{{ article.id }}">{{ article.title }}</a></h2>
-			<p>{{ article.get_markdown | safe | truncatechars_html:100 }}</p>
-			<p><a id="Read_More" href="/blog/{{ article.id }}"><button class="btn btn-default">Read More</button></a></p>
-			<p class="pull-right">
-				{% for tag in article.tags.all %}
-				<span class="label label-default">{{ tag.name }}</span>
-				{% endfor %}
-			</p>
+    <div class="row panel panel-default">
+		<div class="panel-body">
+			<article class="col-xs-12 white">
+				<h2><a id="article_title" href="/blog/{{ article.id }}">{{ article.title }}</a></h2>
+				<p>{{ article.get_markdown | safe | truncatechars_html:100 }}</p>
+				<p><a id="Read_More" href="/blog/{{ article.id }}"><button class="btn btn-default">Read More</button></a></p>
+		    </article>
+		</div>
+		<div class="panel-footer">
 			<ul class="list-inline">
 				<li><span class="glyphicon glyphicon-time"></span> {{ article.pub_date | date:"j M" }}</li>
 				<li><span class="glyphicon glyphicon-comment"></span> {{ article.comment_num }}</li>
+				<p class="pull-right">
+					{% for tag in article.tags.all %}
+					<span class="label label-default">{{ tag.name }}</span>
+					{% endfor %}
+				</p>
 			</ul>
-		</article>
+		</div>
     </div>
+    <hr>
     {% endfor %}
 {% else %}
 	<div class="row">
 		<article class="col-xs-12">
 			<h2>未找到文章</h2>
 		</article>
-		</div>
-	<hr>
+	</div>
 {% endif %}
 
 {% endblock %}
