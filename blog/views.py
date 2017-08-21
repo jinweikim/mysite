@@ -32,7 +32,7 @@ def log_in(request):
                 url = request.POST.get('source_url','/blog')
                 return redirect(url)
             else:
-                return render(request,'login.html',{'form':form ,'error':"password or username is not true!"})
+                return render(request,'login.html',{'form':form ,'error':"用户名或密码不正确"})
         else:
             return render(request,'login.html',{'form':form})
 
