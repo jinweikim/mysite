@@ -117,3 +117,12 @@ class Author(models.Model):
 
     def __str__(self):
         return self.name
+
+class Train(models.Model):
+    train_id = models.CharField('train_id',max_length=256)
+    start = models.CharField('start', max_length=256)
+    dest = models.CharField('dest', max_length=256)
+    time = models.CharField('time', max_length=256)
+
+    def __str__(self):
+        return self.id

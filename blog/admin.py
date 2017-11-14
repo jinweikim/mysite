@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.db import models
 from django import forms
-from .models import Comment,Image,Article,Category,NewUser,Author,Tag
+from .models import Comment,Image,Article,Category,NewUser,Author,Tag,Train
 from .forms import ArticleForm
 class CommentAdmin(admin.ModelAdmin):
     list_display = ('user_id','article_id','pub_date','content')
@@ -25,6 +25,9 @@ class AuthorAdmin(admin.ModelAdmin):
 class TagAdmin(admin.ModelAdmin):
     list_display = ('name','created_time','update_time')
 
+class TrainAdmin(admin.ModelAdmin):
+    list_display = ('train_id','start','dest','time')
+
 admin.site.register(Comment,CommentAdmin)
 admin.site.register(Image,ImageAdmin)
 admin.site.register(Article,ArticleAdmin)
@@ -32,3 +35,4 @@ admin.site.register(Category,CategoryAdmin)
 admin.site.register(NewUser,NewUserAdmin)
 admin.site.register(Author,AuthorAdmin)
 admin.site.register(Tag,TagAdmin)
+admin.site.register(Train,TrainAdmin)

@@ -1,12 +1,29 @@
 from django.shortcuts import render,render_to_response,redirect,get_object_or_404
-from .models import Article,Comment,NewUser,Tag,Category
+from .models import Article,Comment,NewUser,Tag,Category,Author,Train
 from .forms import LoginForm,CommentForm,RegisterForm,SetInfoForm,SearchForm
 from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.decorators import login_required
 from urllib.parse import urljoin
 from django.core.exceptions import ObjectDoesNotExist
 from django.views.generic.list import ListView
+from .search import train
 import markdown2
+import django_filters
+from rest_framework import viewsets,filters
+from .Serialzier import AuthorSeralizer,CategorySeralizer,TrainSeralizer
+
+class AuthorViewSet(viewsets.ModelViewSet):
+    queryset = Author.objects.all()
+    serializer_class = AuthorSeralizer
+
+class CategoryViewSet(viewsets.ModelViewSet):
+    queryset = Category.objects.all()
+    serializer_class = CategorySeralizer
+
+class TrainViewSet(viewsets.ModelViewSet):
+    queryset = Train.objects.all()
+    serializer_class = TrainSeralizer
+
 def index(request):
     article_list = Article.objects.query_by_time()
     loginform = LoginForm()
@@ -18,6 +35,8 @@ def index(request):
     return render(request,'index.html',context)
 
 def log_in(request):
+    t = train()
+    t.search()
     if request.method == 'GET':
         form = LoginForm()
         return render(request,'login.html',{'form':form})
