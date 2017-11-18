@@ -6,10 +6,12 @@ from django.contrib.auth.decorators import login_required
 from urllib.parse import urljoin
 from django.core.exceptions import ObjectDoesNotExist
 from django.views.generic.list import ListView
+from rest_framework.decorators import api_view
 from .search import train
 import markdown2
 import django_filters
 from rest_framework import viewsets,filters
+from rest_framework.response import Response
 from .Serialzier import AuthorSeralizer,CategorySeralizer,TrainSeralizer
 
 class AuthorViewSet(viewsets.ModelViewSet):
@@ -24,6 +26,19 @@ class TrainViewSet(viewsets.ModelViewSet):
     queryset = Train.objects.all()
     serializer_class = TrainSeralizer
 
+@api_view(['GET','POST','DELETE'])
+def train_detail(request):
+    if request.method == 'GET':
+        f = request.GET.get('from_station')
+        t = request.GET.get('to_station')
+        date = request.GET.get('date')
+        Train.objects.filter().delete()
+        ta = train(f,t,date)
+        ta.search()
+        result = Train.objects.filter(date=date)
+        serializer = TrainSeralizer(result,many=True)
+        return Response(serializer.data)
+
 def index(request):
     article_list = Article.objects.query_by_time()
     loginform = LoginForm()
@@ -35,8 +50,6 @@ def index(request):
     return render(request,'index.html',context)
 
 def log_in(request):
-    t = train()
-    t.search()
     if request.method == 'GET':
         form = LoginForm()
         return render(request,'login.html',{'form':form})

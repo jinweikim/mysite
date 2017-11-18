@@ -12,6 +12,7 @@ urlpatterns = [
     url(r'^(?P<article_id>[0-9]+)/comment/$',views.comment,name='comment'),
     url(r'^(?P<article_id>[0-9]+)/$',views.article,name='article'),
     url(r'^tag/(?P<tag_id>\d+)$',views.TagView.as_view(),name='tag'),
+    url(r'tra',views.train_detail,name='tra'),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 router = routers.DefaultRouter()

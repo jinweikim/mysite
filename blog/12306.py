@@ -10,7 +10,7 @@ str = 'https://kyfw.12306.cn/otn/leftTicket/query?leftTicketDTO.train_date=2017-
 # d = input('请输入时间(格式：2017-02-08）：\n')
 f = '昆山'
 t = '南京'
-d = '2017-11-13'
+d = '2017-11-20'
 from_station = stations[f]
 to_station = stations[t]
 print(from_station)
@@ -35,7 +35,7 @@ for key in data['result']:
     start = maps[str.split('|')[6]]
     dest = maps[str.split('|')[7]]
     time = str.split('|')[8]
-    # print("车次号:" + id + " 出发站: " + start + " 目的站： " + dest + " 时间：" + time)
+    print("车次号:" + id + " 出发站: " + start + " 目的站： " + dest + " 时间：" + time)
 
 # trains = req.json()['data']
 # print(data)

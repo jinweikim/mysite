@@ -4,12 +4,14 @@ from .models import Train
 
 class train:
 
-    f = '扬州'
-    t = '南京'
-    d = '2017-11-13'
-    # f = input('请输入出发城市：\n')
-    # t = input('请输入到达城市:\n')
-    # d = input('请输入时间(格式：2017-02-08）：\n')
+    f = ''
+    t = ''
+    d = ''
+
+    def __init__(self,from_station,to_station,date):
+        self.f = from_station
+        self.t = to_station
+        self.d = date
 
     def search(self):
         from_station = stations[self.f]
@@ -43,7 +45,7 @@ class train:
             # train.time = time
             # train.save()
             # print("车次号:" + id + " 出发站: " + start + " 目的站： " + dest + " 时间：" + time)
-            Train.objects.get_or_create(train_id=train_id,start=start,dest=dest,time=time)
+            Train.objects.get_or_create(train_id=train_id,start=start,dest=dest,time=time,date=self.d)
 
 
 

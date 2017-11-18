@@ -123,6 +123,7 @@ class Train(models.Model):
     start = models.CharField('start', max_length=256)
     dest = models.CharField('dest', max_length=256)
     time = models.CharField('time', max_length=256)
+    date = models.CharField('date',default="",max_length=256)
 
     def __str__(self):
         return self.id

@@ -26,7 +26,7 @@ class TagAdmin(admin.ModelAdmin):
     list_display = ('name','created_time','update_time')
 
 class TrainAdmin(admin.ModelAdmin):
-    list_display = ('train_id','start','dest','time')
+    list_display = ('train_id','start','dest','date','time')
 
 admin.site.register(Comment,CommentAdmin)
 admin.site.register(Image,ImageAdmin)
